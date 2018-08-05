@@ -45,6 +45,7 @@ public class SortTestHelper {
         sortMethod.invoke(sortClass,params);
         long endTime = System.currentTimeMillis();
         assert isSorted(arr);
+        printArray(arr);
         System.out.println(sortClass.getSimpleName()+":"+(endTime-startTime));
     }
 
