@@ -17,7 +17,7 @@ public class SelectionSort {
 
     private static void sort(int[] arr) {
         int n = arr.length;
-        for( int i = 0; i < n-1 ;i++){
+        for( int i = 0; i < n ;i++){
             int mindex = i;
             for(int j = i+1 ; j < n ; j++){
                 mindex = arr[j]<arr[mindex]?j:mindex;
