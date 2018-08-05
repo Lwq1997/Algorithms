@@ -19,9 +19,9 @@ public class InsertionSort {
     public static void sort(Comparable[] arr){
         int n = arr.length;
         for(int i = 1; i < n ;i++){
-            //j相当于数组下标
-            for(int j = i-1 ; j >= 0 && arr[j].compareTo(arr[j+1])==1 ; j--){
-                swap(arr,j+1,j);
+            //从i = 1 开始插入，也就是从第二个元素开始
+            for(int j = i; j > 0 && arr[j].compareTo(arr[j-1])==-1 ; j--){
+                swap(arr,j-1,j);
             }
         }
     }
