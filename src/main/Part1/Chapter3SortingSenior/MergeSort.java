@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class MergeSort {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        int N = 100;
+        int N = 10000;
         Integer[] arr = SortTestHelper.generateRandomArray(N,0,N);
         SortTestHelper.testSort("main.Part1.Chapter3SortingSenior.MergeSort",arr);
     }
@@ -29,7 +29,10 @@ public class MergeSort {
         int mid = l+((r-l)>>1);
         mergeSort(arr,l,mid);
         mergeSort(arr,mid+1,r);
-        merge(arr,l,mid,r);
+//        归并排序的算法优化(判断arr[mid]大于arr[mid+1],再接着往下进行merge)
+        if(arr[mid].compareTo(arr[mid+1])>0){
+            merge(arr,l,mid,r);
+        }
     }
 
     private static void merge(Comparable[] arr, int left, int middle, int right) {
