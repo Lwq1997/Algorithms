@@ -22,6 +22,28 @@ public class SortTestHelper {
         return arr;
     }
 
+    /**
+     * 生成有n个元素的几乎有序随机数组
+     */
+    public static Integer[] generateRandomArray(int n,int swapTime){
+        Integer[] arr = new Integer[n];
+        for(int i = 0 ; i < n ; i++){
+            arr[i] = i;
+        }
+        for(int i = 0; i < swapTime; i ++){
+            int x = (int) (Math.random()*n);
+            int y = (int) (Math.random()*n);
+            swap(arr,x,y);
+        }
+        return arr;
+    }
+
+    private static void swap(Object[] arr, int i, int j) {
+        Object tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
     public static void printArray(Object[] arr){
         int n = arr.length;
         for(Object o :arr){
