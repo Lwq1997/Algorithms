@@ -24,9 +24,22 @@ public class MaxHeap <T extends Comparable>{
 
     public MaxHeap(int capacity){
         // 不能直接声明泛型数组，只能先声明再强制转换
-        this.data = (T[]) new Comparable[capacity];
+        this.data = (T[]) new Comparable[capacity+1];
         count = 0;
         this.capacity = capacity;
+    }
+
+    public MaxHeap(T arr[]){
+        int n = arr.length;
+        data = (T[]) new Comparable[n+1];
+        capacity=n;
+        for(int i = 0; i < n;i++){
+            data[i+1] = arr[i];
+        }
+        count=n;
+        for(int i = count/2;i>=1;i--){
+            shifDown(i);
+        }
     }
 
     public int size(){
@@ -88,10 +101,6 @@ public class MaxHeap <T extends Comparable>{
             swap(k,j);
             // 把换后的子节点作为父节点，接着往下走
             k=j;
-        }
-        while (k>count&&data[k*2].compareTo(data[k])==1){
-            swap(k,k*2);
-            k*=2;
         }
     }
 
