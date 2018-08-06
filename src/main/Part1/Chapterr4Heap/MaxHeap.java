@@ -37,6 +37,8 @@ public class MaxHeap <T extends Comparable>{
             data[i+1] = arr[i];
         }
         count=n;
+        // 核心 : 从floor(n/2)下标位置的元素开始到下标为0的元素一次执行shiftDown,好好理解4-5老师前8分钟的图示
+        // 执行完，就根据数组生成一个最大堆了
         for(int i = count/2;i>=1;i--){
             shifDown(i);
         }
