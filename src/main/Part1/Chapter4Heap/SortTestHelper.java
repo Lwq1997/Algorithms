@@ -1,4 +1,4 @@
-package main.Part1.Chapterr4Heap;
+package main.Part1.Chapter4Heap;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

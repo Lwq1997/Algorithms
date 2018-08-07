@@ -1,4 +1,4 @@
-package main.Part1.Chapterr4Heap;
+package main.Part1.Chapter4Heap;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -31,6 +31,6 @@ public class HeapSort1 {
         Integer[] arr = SortTestHelper.generateRandomArray(N, 0, N);
         // 测试数组是否有序
         // sort函数一定不要穿数组长度，要不老会报错
-        SortTestHelper.testSort("main.Part1.Chapterr4Heap.HeapSort1", arr);
+        SortTestHelper.testSort("main.Part1.Chapter4Heap.HeapSort1", arr);
     }
 }

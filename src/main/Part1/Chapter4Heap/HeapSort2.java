@@ -1,4 +1,4 @@
-package main.Part1.Chapterr4Heap;
+package main.Part1.Chapter4Heap;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,7 +11,7 @@ public class HeapSort2 {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         int N = 100000;
         Integer[] arr = SortTestHelper.generateRandomArray(N,0,N);
-        SortTestHelper.testSort("main.Part1.Chapterr4Heap.HeapSort2",arr);
+        SortTestHelper.testSort("main.Part1.Chapter4Heap.HeapSort2",arr);
     }
 
     public static void sort(Comparable[] arr){
