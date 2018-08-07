@@ -168,6 +168,85 @@ public class BST <Key extends Comparable<Key>, Value>{
         }
     }
 
+    /**
+     * 寻找最小的键值
+     */
+    public Key min(){
+        Node minNode = min(root);
+        return minNode.key;
+    }
+
+    private Node min(Node node) {
+        if(node.left==null){
+            return node;
+        }
+        return min(node.left);
+    }
+
+    /**
+     * 寻找最大的键值
+     */
+    public Key max() {
+        assert (count != 0);
+        Node maxNode = max(root);
+        return maxNode.key;
+    }
+
+    private Node max(Node node) {
+        if(node.right==null){
+            return node;
+        }
+        return min(node.right);
+    }
+
+    /**
+     * 删除最大值对应的节点
+     */
+    public void deleteMax(){
+        if(root!=null){
+            root = deleteMax(root);
+        }
+    }
+
+    private Node deleteMax(Node node) {
+        if (node.right == null) {
+            // 没有右节点了，就要看看左节点是否存在
+            Node leftNode = node.left;
+            // 删除最小节点node
+            node.left = null;
+            count--;
+            // 不管rightNode是否为空，都可以直接返回地
+            return leftNode;
+        }
+        // 好好体验递归
+        node.right = deleteMax(node.right);
+        return node;
+    }
+
+    /**
+     * 删除最小值对应的节点
+     */
+    public void deleteMin(){
+        if (root!=null){
+            root = deleteMin(root);
+        }
+    }
+
+    private Node deleteMin(Node node) {
+        if (node.left == null) {
+            // 没有左节点了，就要看看右节点是否存在
+            Node rightNode = node.right;
+            // 删除最小节点node
+            node.right = null;
+            count--;
+            // 不管rightNode是否为空，都可以直接返回地
+            return rightNode;
+        }
+        // 好好体验递归
+        node.left = deleteMin(node.left);
+        return node;
+    }
+
     public static void main(String[] args) {
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
 
@@ -205,5 +284,21 @@ public class BST <Key extends Comparable<Key>, Value>{
         System.out.println("levelOrder: ");
         bst.levelOrder();
         System.out.println();
+
+//        System.out.println("test removemin:");
+//        while (!bst.isEmpty()){
+//            System.out.print("min: "+bst.min()+",");
+//            bst.deleteMin();
+//            System.out.println("after removemin,size = "+bst.size());
+//        }
+//        System.out.println();
+
+        // 输出的元素应该是从大到小排列的
+        System.out.println("Test removeMax: ");
+        while (!bst.isEmpty()) {
+            System.out.print("max: " + bst.max() + " , ");
+            bst.deleteMax();
+            System.out.println("After removeMax, size = " + bst.size());
+        }
     }
 }
