@@ -94,10 +94,54 @@ public class UnionFindTestHelper {
         System.out.println("UF3, " + 2 * n + " ops, " + (endTime - startTime) + "ms");
     }
 
+    public static void testUF5(int n){
+        UnionFind5 uf = new UnionFind5(n);
+        long startTime = System.currentTimeMillis();
+
+        for(int i = 0; i < n; i++){
+            int a = (int) (Math.random()*n);
+            int b = (int) (Math.random()*n);
+            uf.unionElements(a,b);
+        }
+
+        for(int i = 0; i < n ; i++){
+            int a = (int) (Math.random() * n);
+            int b = (int) (Math.random() * n);
+            uf.isConnected(a, b);
+        }
+
+        long endTime = System.currentTimeMillis();
+
+        // 打印输出对这2n个操作的耗时
+        System.out.println("UF3, " + 2 * n + " ops, " + (endTime - startTime) + "ms");
+    }
+    public static void testUF6(int n){
+        UnionFind6 uf = new UnionFind6(n);
+        long startTime = System.currentTimeMillis();
+
+        for(int i = 0; i < n; i++){
+            int a = (int) (Math.random()*n);
+            int b = (int) (Math.random()*n);
+            uf.unionElements(a,b);
+        }
+
+        for(int i = 0; i < n ; i++){
+            int a = (int) (Math.random() * n);
+            int b = (int) (Math.random() * n);
+            uf.isConnected(a, b);
+        }
+
+        long endTime = System.currentTimeMillis();
+
+        // 打印输出对这2n个操作的耗时
+        System.out.println("UF3, " + 2 * n + " ops, " + (endTime - startTime) + "ms");
+    }
     public static void main(String[] args) {
-        UnionFindTestHelper.testUF(100000);
-        UnionFindTestHelper.testUF2(100000);
+//        UnionFindTestHelper.testUF(100000);
+//        UnionFindTestHelper.testUF2(100000);
         UnionFindTestHelper.testUF3(1000000);
         UnionFindTestHelper.testUF4(1000000);
+        UnionFindTestHelper.testUF5(1000000);
+        UnionFindTestHelper.testUF6(1000000);
     }
 }
