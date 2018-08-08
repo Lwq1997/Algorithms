@@ -23,6 +23,14 @@ public class BST <Key extends Comparable<Key>, Value>{
             this.left=null;
             this.right=null;
         }
+
+        public Node(Node node) {
+            // key是唯一地，不能重复
+            this.key = node.key;
+            this.value = node.value;
+            this.left = node.left;
+            this.right = node.right;
+        }
     }
 
     /**
@@ -212,7 +220,6 @@ public class BST <Key extends Comparable<Key>, Value>{
         if (node.right == null) {
             // 没有右节点了，就要看看左节点是否存在
             Node leftNode = node.left;
-            // 删除最小节点node
             node.left = null;
             count--;
             // 不管rightNode是否为空，都可以直接返回地
@@ -234,18 +241,125 @@ public class BST <Key extends Comparable<Key>, Value>{
 
     private Node deleteMin(Node node) {
         if (node.left == null) {
-            // 没有左节点了，就要看看右节点是否存在
+            // 没有左节点了，当前节点就是最小节点，就要看看右节点是否存在
             Node rightNode = node.right;
-            // 删除最小节点node
             node.right = null;
             count--;
-            // 不管rightNode是否为空，都可以直接返回地
+            // 不管rightNode是否为空，都可以直接返回，这个节点就是新的根节点
             return rightNode;
         }
         // 好好体验递归
         node.left = deleteMin(node.left);
         return node;
     }
+
+    public void deleteNode(Key key){
+        root = deleteNode(root,key);
+    }
+
+    private Node deleteNode(Node node, Key key) {
+        if(node == null){
+            return null;
+        }
+        if(key.compareTo(node.key)>0){
+            node.right = deleteNode(node.right,key);
+            return node;
+        }else if(key.compareTo(node.key)<0){
+            node.left = deleteNode(node.left,key);
+            return node;
+        }else {  //key == node.key
+            if(node.left==null){
+                // 左子树为空，看右子树，删除节点后，所有右子树节点前提一位
+                Node rightNode = node.right;
+                node = null;
+                count--;
+                return rightNode;
+            }
+            if(node.right==null){
+                Node leftNode = node.left;
+                node = null;
+                count--;
+                return leftNode;
+            }
+            //左右子树都不为空
+            Node successor = new Node(min(node.right));
+            // 这里++，在下面的deleteMin会--
+            count++;
+            successor.right = deleteMin(node.right);
+            successor.left = node.left;
+            node = null;
+            count -- ;
+            return successor;
+        }
+    }
+
+    /**
+     * 寻找key的floor值，递归算法，不存在返回null
+     */
+    public Key floor(Key key){
+        if(count==0||key.compareTo(min())<0){
+            return null;
+        }
+        Node floorNode = floor(root,key);
+        return floorNode.key;
+    }
+
+    private Node floor(Node node, Key key) {
+        if(node==null){
+            return null;
+        }
+
+        if(node.key == key){
+            return node;
+        }
+
+        if(node.key.compareTo(key)>0){
+            return floor(node.left,key);
+        }
+
+        if(node.key.compareTo(key)<0){
+            return floor(node.right,key);
+        }
+
+        // 如果node.key < key，则node可能是key的floor节点，也有可能不是，因为node的右子树中可能还存在比node.key
+        // 大但是小于key的其余节点),需要尝试着在node的右子树中寻找一下
+        Node tmpNode = floor(node.right,key);
+        if(tmpNode!=null){
+            return tmpNode;
+        }
+        return node;
+    }
+
+    public Key ceil(Key key){
+        if(count==0||key.compareTo(max())>0){
+            return null;
+        }
+        Node ceilNode = ceil(root,key);
+        return ceilNode.key;
+    }
+
+    private Node ceil(Node node, Key key) {
+        if(node == null){
+            return null;
+        }
+        if(node.key==key){
+            return node;
+        }
+        if(node.key.compareTo(key)<0){
+            return ceil(node.right,key);
+        }
+        if (node.key.compareTo(key)>0){
+            return ceil(node.left,key);
+        }
+        // 如果node->key > key，则node可能是key的ceil节点，也有可能不是，因为node的左子树中可能还存在比node-key
+        // 小但是大于key的其余节点),需要尝试着在node的左子树中寻找一下
+        Node tmpNode = ceil(node.left,key);
+        if(tmpNode!=null){
+            return tmpNode;
+        }
+        return node;
+    }
+
 
     public static void main(String[] args) {
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
@@ -300,5 +414,14 @@ public class BST <Key extends Comparable<Key>, Value>{
             bst.deleteMax();
             System.out.println("After removeMax, size = " + bst.size());
         }
+
+        System.out.println("Test removeNode:");
+        for(int i = 0; i < 10; i ++){
+            bst.insert(i,i);
+        }
+        System.out.println(bst.size());
+        bst.deleteNode(5);
+        System.out.println(bst.size());
+
     }
 }
