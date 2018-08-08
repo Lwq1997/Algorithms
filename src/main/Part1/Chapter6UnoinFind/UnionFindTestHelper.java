@@ -51,8 +51,31 @@ public class UnionFindTestHelper {
         System.out.println("UF2, " + 2 * n + " ops, " + (endTime - startTime) + "ms");
     }
 
+    public static void testUF3(int n){
+        UnionFind3 uf = new UnionFind3(n);
+        long startTime = System.currentTimeMillis();
+
+        for(int i = 0; i < n; i++){
+            int a = (int) (Math.random()*n);
+            int b = (int) (Math.random()*n);
+            uf.unionElements(a,b);
+        }
+
+        for(int i = 0; i < n ; i++){
+            int a = (int) (Math.random() * n);
+            int b = (int) (Math.random() * n);
+            uf.isConnected(a, b);
+        }
+
+        long endTime = System.currentTimeMillis();
+
+        // 打印输出对这2n个操作的耗时
+        System.out.println("UF3, " + 2 * n + " ops, " + (endTime - startTime) + "ms");
+    }
+
     public static void main(String[] args) {
-        UnionFindTestHelper.testUF(10000);
-        UnionFindTestHelper.testUF2(10000);
+        UnionFindTestHelper.testUF(100000);
+        UnionFindTestHelper.testUF2(100000);
+        UnionFindTestHelper.testUF3(1000000);
     }
 }
