@@ -14,6 +14,8 @@ public class Main {
         System.out.println("graph1 in Sparse Graph:");
         g1.show();
 
+        Components components1 = new Components(g1);
+        System.out.println("TestG1.txt, Components Count: " + components1.count());
         System.out.println();
 
         DenseGraph g2 = new DenseGraph(13, false);
@@ -29,6 +31,8 @@ public class Main {
         ReadGraph readGraph3 = new ReadGraph(g3, filename);
         System.out.println("graph2 in Sparse Graph:");
         g3.show();
+        Components component2 = new Components(g2);
+        System.out.println("TestG2.txt, Components Count: " + component2.count());
 
         System.out.println();
 
