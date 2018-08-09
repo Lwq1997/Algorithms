@@ -1,6 +1,7 @@
 package main.Part1.Chapter7GraphBasic;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @create 2018-08-09 9:34
  * @desc 稀疏图  邻接表
  **/
-public class SparseGraph {
+public class SparseGraph implements Graph{
 //    图的顶点数
     private int vertices;
 
@@ -37,7 +38,7 @@ public class SparseGraph {
     }
 
 //    返回边数
-    private int E(){
+    public int E(){
         return edges;
     }
 
@@ -57,7 +58,7 @@ public class SparseGraph {
         edges++;
     }
 
-    private boolean hasEdge(int v, int w) {
+    public boolean hasEdge(int v, int w) {
         assert (v>=0&&v<vertices);
         assert (w>=0&&w<vertices);
         for(int i = 0; i < adj[v].size(); i++){
@@ -66,5 +67,27 @@ public class SparseGraph {
             }
         }
         return false;
+    }
+
+    /**
+     * 返回顶点v的所有临边
+     */
+    public Iterable<Integer> adj(int v){
+        assert (v>=0&&v<vertices);
+        return adj[v];
+    }
+
+    /**
+     * 展示领接表的方法
+     */
+    public void show(){
+        for(int i = 0; i < vertices; i++){
+            System.out.print("vertex: " + i + ":\t");
+            Iterator iterator = adj[i].iterator();
+            while (iterator.hasNext()){
+                System.out.print(iterator.next()+" ");
+            }
+            System.out.println();
+        }
     }
 }

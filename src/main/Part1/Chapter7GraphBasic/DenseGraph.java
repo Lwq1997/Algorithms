@@ -8,7 +8,7 @@ import java.util.List;
  * @create 2018-08-09 9:34
  * @desc 稠密图，邻接矩阵
  **/
-public class DenseGraph {
+public class DenseGraph implements Graph{
 //    图的顶点数
     private int vertices;
 
@@ -34,7 +34,7 @@ public class DenseGraph {
     }
 
 //    返回边数
-    private int E(){
+    public int E(){
         return edges;
     }
 
@@ -55,7 +55,7 @@ public class DenseGraph {
         edges++;
     }
 
-    private boolean hasEdge(int v, int w) {
+    public boolean hasEdge(int v, int w) {
         assert (v>=0&&v<vertices);
         assert (w>=0&&w<vertices);
         return adj[v][w];
@@ -64,7 +64,7 @@ public class DenseGraph {
     /**
      * 返回顶点v的所有边
      */
-    public Iterable<Integer> adg(int v){
+    public Iterable<Integer> adj(int v){
         assert (v>=0&&v<vertices);
         List<Integer> adjV = new ArrayList<>();
         for(int i = 0; i < vertices ; i++){
@@ -73,5 +73,17 @@ public class DenseGraph {
             }
         }
         return adjV;
+    }
+
+    /**
+     * 展示领接矩阵的方法
+     */
+    public void show(){
+        for(int i = 0; i < vertices; i ++){
+            for(int j = 0; j < vertices;j++){
+                System.out.print(adj[i][j]+" \t");
+            }
+            System.out.println();
+        }
     }
 }
