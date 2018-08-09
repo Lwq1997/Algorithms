@@ -1,5 +1,8 @@
 package main.Part1.Chapter7GraphBasic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Lwq
  * @create 2018-08-09 9:34
@@ -56,5 +59,19 @@ public class DenseGraph {
         assert (v>=0&&v<vertices);
         assert (w>=0&&w<vertices);
         return adj[v][w];
+    }
+
+    /**
+     * 返回顶点v的所有边
+     */
+    public Iterable<Integer> adg(int v){
+        assert (v>=0&&v<vertices);
+        List<Integer> adjV = new ArrayList<>();
+        for(int i = 0; i < vertices ; i++){
+            if(adj[v][i]){
+                adjV.add(i);
+            }
+        }
+        return adjV;
     }
 }
