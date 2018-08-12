@@ -60,7 +60,7 @@ public class Array<E> {
         add(0,e);
     }
 
-    public void getLast(E e){
+    public void addLast(E e){
         add(size,e);
     }
 
