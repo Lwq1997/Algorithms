@@ -10,7 +10,7 @@ public class Array<E> {
     private E[] data;
     private int size;
 
-    private Array(int capacity){
+    public Array(int capacity){
         data = (E[]) new Object[capacity];
         size = 0;
     }
