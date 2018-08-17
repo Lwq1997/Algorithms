@@ -36,7 +36,7 @@ public class treeDepth<K>{
             if(len==0){
                 break;
             }
-            while (len>0){
+            while (len>0){   // 如果当前层，还有节点
                 Node t = queue.dequeue();
                 len--;
                 if (len == 0)
